@@ -1,5 +1,5 @@
 #Arquivos ignorados
-a.out
-mamikami
-mamikami.exe
-
+*.out
+*.class
+*.exe
+*.mmk
