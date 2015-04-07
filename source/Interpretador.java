@@ -6,13 +6,13 @@ class Interpretador {
     public void Token(String a) {
         
     }
-    public String LerLinha(String linhas) {
+    public int getNumeroLinhas(String args) {
         try {
-            System.out.println(this.NumeroLinhas(linhas));
+            return this.NumeroLinhas(args);
         } catch (IOException e) {
             System.out.println("Do u try fuck with me?");
         }
-        return linhas;
+        return -1;
     }
     public int NumeroLinhas(String args) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(args));
