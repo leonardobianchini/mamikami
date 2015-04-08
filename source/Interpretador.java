@@ -9,6 +9,16 @@ class Interpretador {
     public void Token(String a) {
         
     }
+    public String EncontraPontoVirgula(String a) {
+        String l = a; 
+        for(int i = 0; i < a.length(); i++) {
+            if(a.charAt(i) == ';') {
+                l = a.substring(0,i);
+                break;
+            }
+        }
+        return l;
+    }
     //função que retorna o numero de linhas que tem o arquivo
     public int getNumeroLinhas(String args) {
         try {
