@@ -7,5 +7,6 @@ class Mamikami {
         String l = a.RemovePontoVirgula(linhas[2]);
         System.out.println(l);
         System.out.println(a.TokenAtribuicaoVariavel(l));
+       	a.IdentificaFuncao(linhas);
     }
 }

@@ -6,25 +6,15 @@ import java.io.File;
 class Interpretador {
     private int nota;
     
-    public String TokenAtribuicaoVariavel(String a) {
-        String b = a;
-        for(int i = 0; i < a.length() ; i++) {
-            if(a.charAt(i) == '=') {
-                b = a.substring(0, i);
-                b = b.trim();
+    public String IdentificaFuncao(String[] a) { //recebe o arquivo String e identifica as funções
+        String l[];// = a; //faco essa atribuição porque Java enche o saco dizendo que a variavel não foi declarada
+        for (int i = 0; i < a.length ; i++) {
+            if(a[i].toLowerCase().contains("function")) {
+                System.out.println(a[i]);
             }
+            if(a[i].toLowerCase().contains("main")) break;
         }
-        return b;
-    }
-    public String RemovePontoVirgula(String a) {
-        String l = a; 
-        for(int i = 0; i < a.length(); i++) {
-            if(a.charAt(i) == ';') {
-                l = a.substring(0,i);
-                break;
-            }
-        }
-        return l;
+        return a[0];
     }
     //função que retorna o numero de linhas que tem o arquivo
     public int getNumeroLinhas(String args) {
