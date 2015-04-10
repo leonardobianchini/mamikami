@@ -18,5 +18,5 @@ class Token {
             }
         }
         return l;
-    }   
+    }
 }
