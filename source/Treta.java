@@ -3,7 +3,7 @@ import java.io.*;
 class Mamikami {
 	public static void main(String[] args) throws IOException {
 		Scanner scanner = new Scanner(new FileReader("um.mmk")).useDelimiter(";");
-		while(scanner.hasNext()) {
+		while(scanner.hasNext()) {    
 			String nome = scanner.next();
 			String cidade = scanner.next();
 			String dd = scanner.next();

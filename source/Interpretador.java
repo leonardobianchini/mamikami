@@ -6,10 +6,17 @@ import java.io.File;
 class Interpretador {
     private int nota;
     
-    public void Token(String a) {
-        
+    public String TokenAtribuicaoVariavel(String a) {
+        String b = a;
+        for(int i = 0; i < a.length() ; i++) {
+            if(a.charAt(i) == '=') {
+                b = a.substring(0, i);
+                b = b.trim();
+            }
+        }
+        return b;
     }
-    public String EncontraPontoVirgula(String a) {
+    public String RemovePontoVirgula(String a) {
         String l = a; 
         for(int i = 0; i < a.length(); i++) {
             if(a.charAt(i) == ';') {
