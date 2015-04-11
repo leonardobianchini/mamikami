@@ -5,16 +5,31 @@ import java.util.Scanner;
 import java.io.File;
 class Interpretador {
     private int nota;
-    
-    public String IdentificaFuncao(String[] a) { //recebe o arquivo String e identifica as funções
-        String l[];// = a; //faco essa atribuição porque Java enche o saco dizendo que a variavel não foi declarada
+    private Function f[];
+    //private Variavel v[];
+    private Token t;
+
+    public Function[] IdentificaFuncoes(String[] a) { //recebe o arquivo String e identifica as funções
+        int j, k=0,l;
+        t = new Token();
+        j = t.getQtdPalavra(a, "function");
+        f = new Function[j+1];
+        String b;
         for (int i = 0; i < a.length ; i++) {
-            if(a[i].toLowerCase().contains("function")) {
-                System.out.println(a[i]);
-            }
             if(a[i].toLowerCase().contains("main")) break;
+            if(a[i].toLowerCase().contains("function")) {
+                j = 0;
+                while(a[i].charAt(j) != ')') j++;
+                b = a[i].substring(0,j+1);
+                b = t.RemovePalavra(b,"function");
+                f[k] = new Function();
+                f[k].setTipoRetorno(t.getRetornoFuncao(b));
+                f[k].setNome(t.getNomeFuncao(b));
+                t.getParametrosFuncao(b);
+                k++;
+            }
         }
-        return a[0];
+        return f;
     }
     //função que retorna o numero de linhas que tem o arquivo
     public int getNumeroLinhas(String args) {
