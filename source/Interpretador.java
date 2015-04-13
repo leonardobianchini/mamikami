@@ -49,7 +49,7 @@ class Interpretador {
         return linhas;
     }
     //Função que cria o vetor, chamada pela main
-    public String[] CriaVetorArquivo(String args) {
+    public String[] CriaVetorArquivo(String args){
         try {
             return this.ConverteArquivoVetorString(args,this.getNumeroLinhas(args));
         } catch (IOException e) {
