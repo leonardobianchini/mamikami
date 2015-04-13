@@ -25,7 +25,7 @@ class Interpretador {
                 f[k] = new Function();
                 f[k].setTipoRetorno(t.getRetornoFuncao(b));
                 f[k].setNome(t.getNomeFuncao(b));
-                t.getParametrosFuncao(b);
+                f[k].setParametros(t.getParametrosFuncao(b));
                 k++;
             }
         }
@@ -73,5 +73,8 @@ class Interpretador {
             i++;
         }
         return linhas;
+    }
+    public void ExecutaMain(String[] args) {
+        System.out.println(t.ProcuraMain(args));
     }
 }

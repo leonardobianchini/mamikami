@@ -1,10 +1,11 @@
 import java.util.Scanner;
 class Mamikami {
 	public static void main(String[] args) {
-        Interpretador a = new Interpretador();
+        Interpretador i = new Interpretador();
         Token t = new Token();
-        int b = a.getNumeroLinhas(args[0]);
-        String linhas[] = a.CriaVetorArquivo(args[0]);
-        a.IdentificaFuncoes(linhas);
+        Function f[];
+        String linhas[] = i.CriaVetorArquivo(args[0]);
+        f = i.IdentificaFuncoes(linhas);
+        t.ProcuraMain(linhas);
     }
 }
