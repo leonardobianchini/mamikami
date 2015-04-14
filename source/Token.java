@@ -98,7 +98,21 @@ class Token {
     							if (l == 0) {
     								String c = "";
     								for (int m = i;m <= j; m++) {
-    									c = c.concat(a[m]);
+    									if(m > i) {
+    										c = c.concat(a[m]);
+    									} else if(m == i) {
+    										for (int n = 0; n < a[m].length(); n++) {
+    											if(a[m].charAt(n) == '{') {
+    												c = c.concat(a[m].substring(n,a[m].length()));
+    											}
+    										}
+    									} else {
+    										for (int n = 0; n < a[m].length(); n++) {
+    											if(a[m].charAt(n) == '}') {
+    												c = c.concat(a[m].substring(n,a[m].length())); 
+    											}
+    										}
+    									}
     								}
     								return c;
     							}
