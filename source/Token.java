@@ -84,36 +84,30 @@ class Token {
     	}
     	return b;
     }
-   	public String ProcuraMain(String[] a) {
+   	public String FuncaoParaString(String[] a, String b) {
     	for (int i = 0; i < a.length ; i++) {
-    		System.out.println("OI");
-    		if(a[i].toLowerCase().contains("main")) {
-    			System.out.println("Bolhinho");
-    			for (int j = 0; j < a[i].length();j++ ) {
-    				if (a[i].charAt(j) == '{') {
-    					System.out.println("bulacha");
-    					int l = 0;
-    					for (int k = j; k < a.length; k++) {
-    						System.out.println("Caramelo");
-    						if (a[k].toLowerCase().contains("{")) {
+    		if(a[i].toLowerCase().contains(b)) {
+    			if(a[i].toLowerCase().contains("{")) {
+    				int l = 0;
+    				for (int j = i;j < a.length; j++) {
+    					for (int k = 0; k < a[j].length(); k++) {
+    						if(a[j].charAt(k) == '{') {
     							l++;
-    						}
-    						if (a[k].toLowerCase().contains("}") && l != 0) {
+    						} else if(a[j].charAt(k) == '}') {
     							l--;
-    						} else {
-    							System.out.println("Caramelo");
-    							String b = "";
-    							for (int m = (k - j);m < j ; m++) {
-    								b = b.concat(a[m]);
+    							if (l == 0) {
+    								String c = "";
+    								for (int m = i;m <= j; m++) {
+    									c = c.concat(a[m]);
+    								}
+    								return c;
     							}
-    							return b;
     						}
     					}
     				}
     			}
     		}
     	}
-    	System.out.println("??");
     	return null;
     }
 }

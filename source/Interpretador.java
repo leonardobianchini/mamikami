@@ -75,6 +75,6 @@ class Interpretador {
         return linhas;
     }
     public void ExecutaMain(String[] args) {
-        System.out.println(t.ProcuraMain(args));
+        System.out.println(t.FuncaoParaString(args, "main"));
     }
 }

@@ -6,6 +6,6 @@ class Mamikami {
         Function f[];
         String linhas[] = i.CriaVetorArquivo(args[0]);
         f = i.IdentificaFuncoes(linhas);
-        t.ProcuraMain(linhas);
+        i.ExecutaMain(linhas);
     }
 }
