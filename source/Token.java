@@ -84,6 +84,10 @@ class Token {
     	}
     	return b;
     }
+    //converte uma função apartir de uma palavra espeficica, procurando por seus escopos e retornando
+    //apenas seus escopos em forma de uma string.
+    ///Sei que isso está uma bosta mais está fazendo o que eu quero, mais tarde eu arrumo, ou quebro em
+    ///funções menores, o que não iria diminuir o tempo de execução, HU3HU3HU3HU3HU3
    	public String FuncaoParaString(String[] a, String b) {
     	for (int i = 0; i < a.length ; i++) {
     		if(a[i].toLowerCase().contains(b)) {
@@ -109,7 +113,7 @@ class Token {
     									} else {
     										for (int n = 0; n < a[m].length(); n++) {
     											if(a[m].charAt(n) == '}') {
-    												c = c.concat(a[m].substring(n,a[m].length())); 
+    												c = c.concat(a[m].substring(0,n)); 
     											}
     										}
     									}
