@@ -14,35 +14,40 @@ class Variavel{
 	public String getTipo(String a){
 	 	return tipo;
 	}
+	/*
+	FALTA DAR UM GET VALOR, TEREMOS QUE APRENDER POLIMORSFISMO, IREI FOCAR NO IF
+	POR ENQUANTO. VLW FLW.
+
+	*/
+
 
 	public void setNome(String variavel) {
 		this.nome = variavel;
 	}
 
 	public void setTipoValor(String valoratribuicao){
-		// recebe  oque tem depois do = e antes do ; e testa qual o melhor tipo
-		//e atribui aqui mesmo
-		for(int i=0;i<valoratribuicao.length();i++){
-			if(valoratribuicao.equals("¬¬")) {
-				this.valors= valoratribuicao;
-				this.tipo = "String";
-			}
-			else if(valoratribuicao.equalsIgnoreCase("true")){
-				this.valorb=true;
-				this.tipo = "boolean";
-			}
-			else if(valoratribuicao.equalsIgnoreCase("false")){
-				this.valorb = false;
-				this.tipo = "boolean";
-			}
-			else if(valoratribuicao.charAt(i) == '.'){
+
+			try{
+				//verifica se é double
 				this.valord= Double.parseDouble(valoratribuicao);
-				this.tipo = "double";
+				this.tipo ="double";
+			}catch(Exception a){
+				try{
+					//verifica se é int
+					this.valori = Integer.parseInt(valoratribuicao);
+					this.tipo="integer";
+				}catch(Exception a2){
+					try{
+						//testa boolean
+						this.valorb = Boolean.parseBoolean(valoratribuicao);
+						this.tipo ="boolean";
+					}catch(Exception a3){
+						//default é string
+						this.valors= String.valueOf(valoratribuicao);
+						this.tipo="String";
+					}
+				}
 			}
-			else{
-				this.valori = Integer.parseInt(valoratribuicao);
-	       		this.tipo="int";
-			}
-		}
 	}
+
 }
