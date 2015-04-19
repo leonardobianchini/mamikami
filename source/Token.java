@@ -91,7 +91,7 @@ class Token {
    	public String FuncaoParaString(String[] a, String b) {
     	for (int i = 0; i < a.length ; i++) {
     		if(a[i].toLowerCase().contains(b)) {
-    			if(a[i].toLowerCase().contains("{")) {
+    			if(!a[i].toLowerCase().contains(";")) {
     				int l = 0;
     				for (int j = i;j < a.length; j++) {
     					for (int k = 0; k < a[j].length(); k++) {
