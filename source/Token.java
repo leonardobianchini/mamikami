@@ -65,7 +65,7 @@ class Token {
     		} else if(b.charAt(j) != ' ') {
     			j--;
     		}else {
-    			b = b.substring(j,i);
+    			b = b.substring(j+1,i);
     			break;
     		}
     	}
