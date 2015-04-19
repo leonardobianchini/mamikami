@@ -1,58 +1,27 @@
-class Condicionais{
-    private double antestoken,depoistoken;//variáveis para pegar o que tem antes e depois do token :D
-
-    public boolean TesteDeCondicao(String testeifi){
-        String  a = getParametrosFuncao(testeifi);/*usando sua função para pegar o que tem dentro dos parenteses */
-        for(int i=0;i<testeifi.length();i++){
-            if(testifi[i].testetoLowerCase().contains(ifi)){/*testar até achar a palavra reservada ifi*/
-                // pega só o retorno da sua função e procura tokens
-                //se você fez um algoritmo n² eu também posso
-                for(int j=0;j < a.length();i++ ){
-                        if(a[j].contains("<")){
-                            antestoken = a[j-1];
-                            depoistoken = a[j+1];
-                            
-                            if(antestoken < depoistoken)
-                                return true;
-                            else
-                                return false;
-                        }
-                        else if(a.contains("<=")){
-                            antestoken = a[j-1];
-                            depoistoken = a[j+1];
-                            if(antestoken <= depoistoken)
-                                return true;
-                            else
-                                return false;
-                        }
-                        else if(a[j].contains(">")){
-                            antestoken = a[j-1];
-                            depoistoken = a[j+1];
-                            if(antestoken > depoistoken)
-                                return true;
-                            else
-                                return false;
-                        }
-                        else if(a[j].contains(">=")){
-                            antestoken = a[j-1];
-                            depoistoken = a[j+1];
-                            if(antestoken >= depoistoken)
-                                return true;
-                            else
-                                return false;
-                        }
-                        else if(a[j].contains("==")){
-                            antestoken = a[j-1];
-                            depoistoken = a[j+1];
-                            if(antestoken == depoistoken)
-                                return true;
-                            else
-                                return false;
-                        }
-
+class Condicionais {
+    private double antestoken,depoistoken;
+    /*parametros
+    1-Uma string contendo os parametros para saber o que tem dentro dos ()
+    2-Um booleano para testar se as condiçoes são verdadeiras.Ex: a <b || a > b, caso seja true a tar
+    primeira sentença ele retornaria true sem precisar mais nenhum teste porque true || alguma coisa é = true,
+    mas caso seja a < b && a>b e a primeira sentença seja true ele ainda tem que testar a segunda sentença  e verificar,
+    no caso daria true && false e retornaria false.
+    3- um int para saber quantos tokes ainda restam para testar
+    */
+    public boolean  CadeiadeTokens(String parametros,boolean bool,int qtdtokens){//não façam isso e casa crianças!!!!
+                int oi;
+                try{
+                    oi = Integer.parseInt(parametros);
+                }catch(Exception a){
+                    return false;
                 }
-            }
-        }
-    }
+                if(oi != 0){
+                    return true;
+                }
+                if(oi == 0){
+                    return false;
+                }
 
+            return false;
+    }
 }
