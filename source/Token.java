@@ -79,10 +79,10 @@ class Token {
     			j++;
     		} else if(b.charAt(i) == ')') {
     			j--;
-    		} if (j > 0) {
+    		} if (j > 0 && k == 0) {
     			k = i;
     		} else if(j == 0 && k > 0) {
-    			b = b.substring(k, (i - k));
+    			b = b.substring(k+1, i);
     			break;
     		}
     		i++;
