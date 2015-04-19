@@ -73,14 +73,19 @@ class Token {
     }
     public String getParametrosFuncao(String a) {
     	String b = a;
-    	int i = 0;
+    	int i = 0, j = 0, k = 0;
     	while(i < a.length()) {
-    		if(b.charAt(i) != '(') {
-    			i++;
-    		} else {
-    			b = b.substring(i+1, a.length());
+    		if(b.charAt(i) == '(') {
+    			j++;
+    		} else if(b.charAt(i) == ')') {
+    			j--;
+    		} if (j > 0) {
+    			k = i;
+    		} else if(j == 0 && k > 0) {
+    			b = b.substring(k, (i - k));
     			break;
     		}
+    		i++;
     	}
     	return b;
     }
