@@ -8,24 +8,21 @@ class Variavel{
 	private int valori;
 
 	public String getNome() {
-	        return this.nome;
+		return this.nome;
 	}
 
-	public String getTipo(String a){
-	 	return tipo;
+	public String getTipo(){
+	 	return this.tipo;
 	}
 	/*
 	FALTA DAR UM GET VALOR, TEREMOS QUE APRENDER POLIMORSFISMO, IREI FOCAR NO IF
 	POR ENQUANTO. VLW FLW.
-
 	*/
-
-
-	public void setNome(String variavel) {
-		this.nome = variavel;
+	public void setNome(String a) {
+		this.nome = a;
 	}
 
-	public void setTipoValor(String valoratribuicao){
+	public void setTipo(String valoratribuicao){
 
 			try{
 				//verifica se é double

@@ -7,6 +7,7 @@ class Interpretador {
     private int nota;
     private Function f[];
     //private Variavel v[];
+    private VetorVariavel v;
     private Token t;
 
     public Function[] IdentificaFuncoes(String[] a) { //recebe o arquivo String e identifica as funções
@@ -35,7 +36,7 @@ class Interpretador {
     public int getNumeroLinhas(String args) {
         try {
             return this.NumeroLinhas(args);
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("Do u try fuck with me?");
         }
         return 0;
@@ -75,6 +76,10 @@ class Interpretador {
         return linhas;
     }
     public void ExecutaMain(String[] args) {
-        System.out.println(t.FuncaoParaString(args, "main"));
+        t.InterpretaEscopo(t.FuncaoParaString(args, "main"), this.CriaVetorVariaveis(args));
+    }
+    public VetorVariavel CriaVetorVariaveis(String[] args) {
+        v = new VetorVariavel(t.getNVariaveis(args));
+        return v;
     }
 }

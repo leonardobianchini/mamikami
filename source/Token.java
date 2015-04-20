@@ -1,4 +1,43 @@
 class Token {
+	private String tokens;
+
+	public Token() {
+		tokens = "=+-/*";
+	}
+	public void InterpretaEscopo(String a, VetorVariavel v) {
+		for (int i = 0;i < a.length(); i++) {
+			if (tokens.toLowerCase().contains(a.valueOf(a.charAt(i)))) {
+				if (a.charAt(i) == '=') {
+                    this.TokenAtribuicao(a,i,v);
+				}
+			}
+		}
+	}
+    public VetorVariavel TokenAtribuicao(String a, int i, VetorVariavel v) {
+        String b = a;
+        int j = i-1, k = 0;
+        while(j >= 0) {
+            if (b.charAt(j) != ' ') {
+                k = 1;
+            } else if(b.charAt(j) == ' ' && k == 1){
+                b = b.substring(j+1,i);
+                v.setNovaVariavel(b);
+                break;
+            }
+            j--;
+        }
+        return null;
+    }
+	public int getNVariaveis(String[] args) {
+		int i = 0, j = 0;
+		while(i < args.length) {
+			if (args[i].toLowerCase().contains("=")) {
+				j++;
+			}
+            i++;
+		}
+		return j;
+	}
 	public String getNomeVariavel(String a) { 
         String b = a; //faco essa atribuição porque Java enche o saco dizendo que a variavel não foi declarada
         for(int i = 0; i < a.length() ; i++) {
