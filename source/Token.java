@@ -15,30 +15,137 @@ class Token {
                     não é necessario verificar igualdade =D    
                     */
                 } else if (a.charAt(i) == '=') {
-                    this.TokenAtribuicaoValor(a,this.TokenAtribuicaoNome(a,i,v),i);
+                    this.TokenAtribuicaoValor(a,i,this.TokenAtribuicaoNome(a,i,v),v);
 				}
 			}
 		}
 	}
-    public VetorVariavel TokenAtribuicaoValor(String a, VariavelTemp v, int b) {
+    public VetorVariavel TokenAtribuicaoValor(String a, int b, VariavelTemp vt, VetorVariavel v) {
         int i = b;
         while(a.charAt(i) != ';') {
             i++;
             if (a.charAt(i) == '+') {
-                v.setValor(this.TokenSoma(a,b,i,0));
+                vt.setValor(this.TokenSoma(a,b,i,0,v));
+                System.out.println(vt.getValor());
+                break;
+            } else if (a.charAt(i) == '-') {
+                vt.setValor(this.TokenSubtracao(a,b,i,0,v));
+                System.out.println(vt.getValor());
+                break;
+            }else if (a.charAt(i) == '*') {
+                vt.setValor(this.TokenMultiplicacao(a,b,i,0,v));
+                System.out.println(vt.getValor());
+                break;
+            } else if (a.charAt(i) == '/') {
+                vt.setValor(this.TokenDivisao(a,b,i,0,v));
+                System.out.println(vt.getValor());
+                break;
             } else if (a.charAt(i) == ';') {
-                a = a.substring(b, i);
+                vt.setValor(Double.valueOf(this.getPalavra(b+1,i-1,a)));
                 break;
             }
         }
         return null;
     }
-    public double TokenSoma(String a, int i, int j, double valor) {
-        while(i < a.length() && i > 0) {
-            //System.out.println(getPalavra(i+1,j-1,a));
-            break;
+    public double TokenSoma(String a, int i, int j, double valor, VetorVariavel v) {
+        String b;
+        b = getPalavra(i+1,j-1,a);
+        try {
+            valor += Double.valueOf(b);
+        } catch (Exception e) {
+            valor += v.getValor(b);
         }
-        return 0;
+        i = j;
+        while(a.charAt(j) != ';') {
+            j++;
+            if (a.charAt(j) == '+') {
+                return this.TokenSoma(a,i,j,valor,v);
+            } else if (a.charAt(j) == '-') {
+                return this.TokenSubtracao(a,i,j,valor,v);
+            } else if (a.charAt(j) == '*') {
+                return this.TokenMultiplicacao(a,i,j,valor,v);
+            } else if (a.charAt(j) == '/') {
+                return this.TokenDivisao(a,i,j,valor,v);
+            } else if (a.charAt(j) == ';') {
+                return this.TokenSoma(a,i,j,valor,v);
+            }
+        }
+        return valor;
+    }
+    public double TokenSubtracao(String a, int i, int j, double valor, VetorVariavel v) {
+        String b;
+        b = getPalavra(i+1,j-1,a);
+        try {
+            valor -= Double.valueOf(b);
+        } catch (Exception e) {
+            valor -= v.getValor(b);
+        }
+        i = j;
+        while(a.charAt(j) != ';') {
+            j++;
+            if (a.charAt(j) == '+') {
+                return this.TokenSoma(a,i,j,valor,v);
+            } else if (a.charAt(j) == '-') {
+                return this.TokenSubtracao(a,i,j,valor,v);
+            } else if (a.charAt(j) == '*') {
+                return this.TokenMultiplicacao(a,i,j,valor,v);
+            } else if (a.charAt(j) == '/') {
+                return this.TokenDivisao(a,i,j,valor,v);
+            } else if (a.charAt(j) == ';') {
+                return this.TokenSoma(a,i,j,valor,v);
+            }
+        }
+        return valor;
+    }
+    public double TokenMultiplicacao(String a, int i, int j, double valor, VetorVariavel v) {
+        String b;
+        b = getPalavra(i+1,j-1,a);
+        try {
+            valor *= Double.valueOf(b);
+        } catch (Exception e) {
+            valor *= v.getValor(b);
+        }
+        i = j;
+        while(a.charAt(j) != ';') {
+            j++;
+            if (a.charAt(j) == '+') {
+                return this.TokenSoma(a,i,j,valor,v);
+            } else if (a.charAt(j) == '-') {
+                return this.TokenSubtracao(a,i,j,valor,v);
+            } else if (a.charAt(j) == '*') {
+                return this.TokenMultiplicacao(a,i,j,valor,v);
+            } else if (a.charAt(j) == '/') {
+                return this.TokenDivisao(a,i,j,valor,v);
+            } else if (a.charAt(j) == ';') {
+                return this.TokenSoma(a,i,j,valor,v);
+            }
+        }
+        return valor;
+    }
+    public double TokenDivisao(String a, int i, int j, double valor, VetorVariavel v) {
+        String b;
+        b = getPalavra(i+1,j-1,a);
+        try {
+            valor /= Double.valueOf(b);
+        } catch (Exception e) {
+            valor /= v.getValor(b);
+        }
+        i = j;
+        while(a.charAt(j) != ';') {
+            j++;
+            if (a.charAt(j) == '+') {
+                return this.TokenSoma(a,i,j,valor,v);
+            } else if (a.charAt(j) == '-') {
+                return this.TokenSubtracao(a,i,j,valor,v);
+            } else if (a.charAt(j) == '*') {
+                return this.TokenMultiplicacao(a,i,j,valor,v);
+            } else if (a.charAt(j) == '/') {
+                return this.TokenDivisao(a,i,j,valor,v);
+            } else if (a.charAt(j) == ';') {
+                return this.TokenSoma(a,i,j,valor,v);
+            }
+        }
+        return valor;
     }
     public String getPalavra(int i, int j, String a) {
         while(i <= j) {
@@ -58,7 +165,7 @@ class Token {
         while(j >= 0) {
             if (b.charAt(j) != ' ') {
                 k = 1;
-            } else if(b.charAt(j) == ' ' && k == 1){
+            } else if(b.charAt(j) == ' ' && k == 1) {
                 b = b.substring(j+1,i);
                 return v.setNovaVariavel(b);
             }

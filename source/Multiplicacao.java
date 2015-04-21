@@ -1,0 +1,3 @@
+class Multiplicacao extends Matematica {
+	
+}

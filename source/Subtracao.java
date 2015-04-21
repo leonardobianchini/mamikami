@@ -1,0 +1,3 @@
+class Subtracao extends Matematica {
+
+}

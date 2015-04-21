@@ -1,0 +1,3 @@
+class Soma extends Matematica {
+
+}

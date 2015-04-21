@@ -2,7 +2,6 @@ class VetorVariavel {
 	private VariavelTemp[] v;
 	public VetorVariavel(int i) {
 		v = new VariavelTemp[i];
-		System.out.println(i);
 	}
 	public VariavelTemp setNovaVariavel(String a) {
 		for (int i = 0;i < v.length; i++) {
