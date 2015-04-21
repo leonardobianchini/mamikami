@@ -12,7 +12,4 @@ class VariavelTemp extends Variavel {
 		this.setTipo();
 		this.valor = a;
 	}
-	public void getPorNome() {
-
-	}
 }

@@ -4,14 +4,15 @@ class VetorVariavel {
 		v = new VariavelTemp[i];
 		System.out.println(i);
 	}
-	public void setNovaVariavel(String a) {
+	public VariavelTemp setNovaVariavel(String a) {
 		for (int i = 0;i < v.length; i++) {
 			if (v[i] == null) {
 				v[i] = new VariavelTemp();
 				v[i].setNome(a);
-				break;
+				return v[i];
 			}
 		}
+		return null;
 	}
 	public VariavelTemp getVariavelPeloNome(String a) {
 		for (int i = 0; i < v.length ; i++) {

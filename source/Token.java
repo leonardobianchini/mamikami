@@ -2,18 +2,57 @@ class Token {
 	private String tokens;
 
 	public Token() {
-		tokens = "=+-/*";
+		tokens = "=+-/*%";
 	}
 	public void InterpretaEscopo(String a, VetorVariavel v) {
 		for (int i = 0;i < a.length(); i++) {
 			if (tokens.toLowerCase().contains(a.valueOf(a.charAt(i)))) {
-				if (a.charAt(i) == '=') {
-                    this.TokenAtribuicao(a,i,v);
+				if (a.charAt(i) == '=' && a.charAt(i+1) == '=') {
+                    i++;
+                    /*
+                    Depois mais eu arrumo isso, momentaneamente funcionará para diferenciar igualdade
+                    Vejamos dessa maneira, criando uma funcao que verifica palavras reservadas
+                    não é necessario verificar igualdade =D    
+                    */
+                } else if (a.charAt(i) == '=') {
+                    this.TokenAtribuicaoValor(a,this.TokenAtribuicaoNome(a,i,v),i);
 				}
 			}
 		}
 	}
-    public VetorVariavel TokenAtribuicao(String a, int i, VetorVariavel v) {
+    public VetorVariavel TokenAtribuicaoValor(String a, VariavelTemp v, int b) {
+        int i = b;
+        while(a.charAt(i) != ';') {
+            i++;
+            if (a.charAt(i) == '+') {
+                v.setValor(this.TokenSoma(a,b,i,0));
+            } else if (a.charAt(i) == ';') {
+                a = a.substring(b, i);
+                break;
+            }
+        }
+        return null;
+    }
+    public double TokenSoma(String a, int i, int j, double valor) {
+        while(i < a.length() && i > 0) {
+            //System.out.println(getPalavra(i+1,j-1,a));
+            break;
+        }
+        return 0;
+    }
+    public String getPalavra(int i, int j, String a) {
+        while(i <= j) {
+            if (a.charAt(i) == ' ') {
+                i++;
+            }else if (a.charAt(j) == ' ') {
+                j--;
+            } else {
+                return a.substring(i,j+1);
+            }
+        }
+        return a;
+    }
+    public VariavelTemp TokenAtribuicaoNome(String a, int i, VetorVariavel v) {
         String b = a;
         int j = i-1, k = 0;
         while(j >= 0) {
@@ -21,8 +60,7 @@ class Token {
                 k = 1;
             } else if(b.charAt(j) == ' ' && k == 1){
                 b = b.substring(j+1,i);
-                v.setNovaVariavel(b);
-                break;
+                return v.setNovaVariavel(b);
             }
             j--;
         }
