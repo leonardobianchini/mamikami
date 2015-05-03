@@ -42,6 +42,11 @@ class Token {
                             while(a.charAt(j) != ';') j++;
                             Saida s = new Saida();
                             s.imprimirln(a.substring((i+1),(j-1)),v);
+                        } else if(b.equals("ifi")) {
+                            i = j;
+                            Se s = new Se();
+                            while(a.charAt(j) != ')') j++;
+                            s.ifi(a.substring(i+1,j),v);
                         }
                         i = j;
 						break;
