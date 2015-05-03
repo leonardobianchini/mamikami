@@ -1,10 +1,13 @@
 class Token {
 	private String tokens;
+	private String[] palavrasReservadas;
 
 	public Token() {
 		tokens = "=+-/*%";
+		//palavrasReservadas = {"if", "si"};
 	}
 	public void InterpretaEscopo(String a, VetorVariavel v) {
+        String b;
 		for (int i = 0;i < a.length(); i++) {
 			if (tokens.toLowerCase().contains(a.valueOf(a.charAt(i)))) {
 				if (a.charAt(i) == '=' && a.charAt(i+1) == '=') {
@@ -12,10 +15,37 @@ class Token {
                     /*
                     Depois mais eu arrumo isso, momentaneamente funcionará para diferenciar igualdade
                     Vejamos dessa maneira, criando uma funcao que verifica palavras reservadas
-                    não é necessario verificar igualdade =D    
+                    não é necessario verificar igualdade =D
                     */
                 } else if (a.charAt(i) == '=') {
                     this.TokenAtribuicaoValor(a,i,this.TokenAtribuicaoNome(a,i,v),v);
+				}
+			} else if(a.charAt(i) == ' ') {
+				continue;
+			} else {
+				for(int j = i; j < a.length(); j++) {
+					if(a.charAt(j) == ' ') {
+						i = j;
+						break;
+					} else if(tokens.toLowerCase().contains(a.valueOf(a.charAt(j)))) {
+						i = j - 1;
+						break;
+					} else if(a.charAt(j) == '(') { 
+                        b = a.substring(i,j);
+                        if (b.equals("printi")) {
+                            i = j;
+                            while(a.charAt(j) != ';') j++;
+                            Saida s = new Saida();
+                            s.imprimir(a.substring((i+1),(j-1)),v);
+                        } else if(b.equals("printiln")) {
+                            i = j;
+                            while(a.charAt(j) != ';') j++;
+                            Saida s = new Saida();
+                            s.imprimirln(a.substring((i+1),(j-1)),v);
+                        }
+                        i = j;
+						break;
+					}
 				}
 			}
 		}
@@ -26,19 +56,15 @@ class Token {
             i++;
             if (a.charAt(i) == '+') {
                 vt.setValor(this.TokenSoma(a,b,i,0,v));
-                System.out.println(vt.getValor());
                 break;
             } else if (a.charAt(i) == '-') {
                 vt.setValor(this.TokenSubtracao(a,b,i,0,v));
-                System.out.println(vt.getValor());
                 break;
             }else if (a.charAt(i) == '*') {
                 vt.setValor(this.TokenMultiplicacao(a,b,i,0,v));
-                System.out.println(vt.getValor());
                 break;
             } else if (a.charAt(i) == '/') {
                 vt.setValor(this.TokenDivisao(a,b,i,0,v));
-                System.out.println(vt.getValor());
                 break;
             } else if (a.charAt(i) == ';') {
                 vt.setValor(Double.valueOf(this.getPalavra(b+1,i-1,a)));
@@ -183,7 +209,7 @@ class Token {
 		}
 		return j;
 	}
-	public String getNomeVariavel(String a) { 
+	public String getNomeVariavel(String a) {
         String b = a; //faco essa atribuição porque Java enche o saco dizendo que a variavel não foi declarada
         for(int i = 0; i < a.length() ; i++) {
             if(a.charAt(i) == '=') {
@@ -302,7 +328,7 @@ class Token {
     									} else {
     										for (int n = 0; n < a[m].length(); n++) {
     											if(a[m].charAt(n) == '}') {
-    												c = c.concat(a[m].substring(0,n)); 
+    												c = c.concat(a[m].substring(0,n));
     											}
     										}
     									}
