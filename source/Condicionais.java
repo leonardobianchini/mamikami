@@ -12,9 +12,7 @@ class Condicionais {
                 int oi;
                 try{
                     oi = Integer.parseInt(parametros);
-                }catch(Exception a){
-                    return false;
-                }
+                }finally{}
                 if(oi != 0){
                     return true;
                 }
