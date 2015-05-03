@@ -42,7 +42,13 @@ class Variavel{
 	public void setValor(String valoratribuicao){
 
 
+		try{
+			//verifica se é double
+			//this.valord= Double.parseDouble(valoratribuicao);
+			this.tipo ="double";
+		}catch(Exception a){
 			try{
+<<<<<<< HEAD
 				//verifica se é double
 
 				Variavel a = new PontoFlutuante();//bug bug bug bug
@@ -66,8 +72,22 @@ class Variavel{
 						d.setValor(valoratribuicao);
 						this.tipo="string";
 					}
+=======
+				//verifica se é int
+				//this.valori = Integer.parseInt(valoratribuicao);
+				this.tipo="integer";
+			}catch(Exception a2){
+				try{
+					//testa boolean
+					//this.valorb = Boolean.parseBoolean(valoratribuicao);
+					this.tipo ="boolean";
+				}catch(Exception a3){
+					//default é string
+					//this.valors= String.valueOf(valoratribuicao);
+					this.tipo="String";
+>>>>>>> ec5800a06d18dd724739380486b7ce6d266d726a
 				}
 			}
+		}
 	}
-
 }

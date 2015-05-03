@@ -31,4 +31,12 @@ class VetorVariavel {
 	public double getValor(String b) {
 		return this.getVariavelPeloNome(b).getValor();
 	}
+	public boolean EuExisto(String b) {
+		try {
+			this.getValor(b);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 }
