@@ -25,7 +25,7 @@ class Variavel{
 		if(this.getTipo() == "string"){
 
 		}
-
+		return null; //tem que retornar algo sabia?
 	}
 
 
