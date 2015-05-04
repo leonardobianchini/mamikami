@@ -39,16 +39,10 @@ class Variavel{
 	}
 	public void setValor(String valoratribuicao){
 
-
-		try{
-			//verifica se é double
-			//this.valord= Double.parseDouble(valoratribuicao);
-			this.tipo ="double";
-		}catch(Exception a){
 			try{
 				//verifica se é double
-				Variavel a = new PontoFlutuante();//bug bug bug bug
-				a.setValor(valoratribuicao);
+				Variavel qualquercoisa = new PontoFlutuante();//bug bug bug bug
+				qualquercoisa.setValor(valoratribuicao);
 				this.tipo ="double";
 			}catch(Exception a){
 				try{
@@ -70,6 +64,5 @@ class Variavel{
 					}
 				}
 			}
-		}
 	}
 }
