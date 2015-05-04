@@ -37,8 +37,6 @@ class Variavel{
 	public void setNome(String a) {
 		this.nome = a;
 	}
-
-
 	public void setValor(String valoratribuicao){
 
 
