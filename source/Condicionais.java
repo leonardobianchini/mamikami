@@ -11,13 +11,40 @@ class Condicionais {
     private Token t = new Token();
     private boolean EuSouReal(String a, VetorVariavel v) {
         int i = 0;
+        if (a.contains("true")) {
+            return true;
+        } else if (a.contains("false")) {
+            System.out.println("Serio mesmo que você escreveu false como condicional?");
+            return false; //Serio isso?
+        }
         while(i < a.length()) {
-            if (a.charAt(i) == '=') {
-                if (a.charAt(i+1) == '=') {
+                if (a.charAt(i) == '=' && a.charAt(i+1) == '=') {
+                String b = a.substring(0,i).replaceAll("\\s+","");
+                int j = i;
+                while(j < (a.length()) && a.charAt(j) != '|'  && a.charAt(j) != '&') j++;
+                String c = a.substring(i+2, j).replaceAll("\\s+","");
+                i = j;
+                double m = 0, n = 1;
+                try {
+                    n = v.getValor(b);
+                } catch (Exception e) {
+                   n = Double.valueOf(b);
+                }
+                try {
+                    m = v.getValor(c);
+                } catch (Exception e) {
+                    m = Double.valueOf(c);
+                }
+                if (m == n) {
+                    return true;
+                }
+            } else if (a.charAt(i) == '<') {
+                if(a.charAt(i+1) == '=') {
                     String b = a.substring(0,i).replaceAll("\\s+","");
                     int j = i;
-                    while(a.charAt(j) != '|'&& j < (a.length()-1) && a.charAt(j) != '&') j++;
+                    while(j < (a.length()) && a.charAt(j) != '|'  && a.charAt(j) != '&') j++;
                     String c = a.substring(i+2, j).replaceAll("\\s+","");
+                    i = j;
                     double m = 0, n = 1;
                     try {
                         n = v.getValor(b);
@@ -29,21 +56,15 @@ class Condicionais {
                     } catch (Exception e) {
                         m = Double.valueOf(c);
                     }
-                    if (m == n) {
+                    if (n <= m) {
                         return true;
                     }
-                } else if(a.charAt(i+1) == '<') {
-
-                } else if(a.charAt(i+1) == '>') {
-
                 }
-            } if (a.charAt(i) == '<') {
+            } else if (a.charAt(i) == '>') {
                 
-            } if (a.charAt(i) == '>') {
+            } else if (a.charAt(i) == '&') {
                 
-            } if (a.charAt(i) == '|') {
-                
-            } if (a.charAt(i) == '&') {
+            } else if (a.charAt(i) == '|') {
                 
             }
             i++;
