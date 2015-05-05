@@ -66,10 +66,10 @@ class Token {
                 vt.setValor(this.TokenSubtracao(a,b,i,0,v));
                 break;
             }else if (a.charAt(i) == '*') {
-                vt.setValor(this.TokenMultiplicacao(a,b,i,0,v));
+                vt.setValor(this.TokenMultiplicacao(a,b,i,1,v));
                 break;
             } else if (a.charAt(i) == '/') {
-                vt.setValor(this.TokenDivisao(a,b,i,0,v));
+                vt.setValor(this.TokenDivisao(a,b,i,1,v));
                 break;
             } else if (a.charAt(i) == ';') {
                 vt.setValor(Double.valueOf(this.getPalavra(b+1,i-1,a)));
@@ -123,7 +123,7 @@ class Token {
             } else if (a.charAt(j) == '/') {
                 return this.TokenDivisao(a,i,j,valor,v);
             } else if (a.charAt(j) == ';') {
-                return this.TokenSoma(a,i,j,valor,v);
+                return this.TokenSubtracao(a,i,j,valor,v);
             }
         }
         return valor;
@@ -148,7 +148,7 @@ class Token {
             } else if (a.charAt(j) == '/') {
                 return this.TokenDivisao(a,i,j,valor,v);
             } else if (a.charAt(j) == ';') {
-                return this.TokenSoma(a,i,j,valor,v);
+                return this.TokenMultiplicacao(a,i,j,valor,v);
             }
         }
         return valor;
@@ -173,7 +173,7 @@ class Token {
             } else if (a.charAt(j) == '/') {
                 return this.TokenDivisao(a,i,j,valor,v);
             } else if (a.charAt(j) == ';') {
-                return this.TokenSoma(a,i,j,valor,v);
+                return this.TokenDivisao(a,i,j,valor,v);
             }
         }
         return valor;

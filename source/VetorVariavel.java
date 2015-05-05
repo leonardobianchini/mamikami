@@ -15,8 +15,10 @@ class VetorVariavel {
 	}
 	public VariavelTemp getVariavelPeloNome(String a) {
 		for (int i = 0; i < v.length ; i++) {
+			a = a.replaceAll("\\s+","");
 			try {
 				if (v[i].getNome().contains(a)) {
+					//System.out.println(a + " para: " + v[i]);
 					return v[i];
 				}
 			} catch(Exception e) {

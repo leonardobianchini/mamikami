@@ -16,6 +16,19 @@ class Condicionais {
         } else if (a.contains("false")) {
             System.out.println("Serio mesmo que você escreveu false como condicional?");
             return false; //Serio isso?
+        } else {
+            try {
+                if (v.getValor(a) > 0) {
+                    System.out.println(v.getValor(a));
+                    return true;
+                }
+            } catch (NullPointerException e) {
+                if (Double.valueOf(a) > 0) {
+                    return true;
+                }
+            } catch (NumberFormatException j) {
+                
+            }
         }
         while(i < a.length()) {
                 if (a.charAt(i) == '=' && a.charAt(i+1) == '=') {

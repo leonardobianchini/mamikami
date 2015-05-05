@@ -8,14 +8,16 @@ class Saida {
 	}
 	private void recursaoPlus(int i, String a, VetorVariavel v) {
 		while (i < a.length()) {
-			if (a.charAt(i) == '"') {
+			if(a.charAt(i) == ')'){
+				break;
+			}else if (a.charAt(i) == '"') {
 				int j = i+1;
 				while(a.charAt(j) != '"') j++;
 				System.out.print(a.substring(i+1,j));
 				i = j;
 			} else if(a.charAt(i) != ' ' && a.charAt(i) != '+') {
 				int j = i+1;
-				while(a.charAt(j) != ' ') j++;
+				while(j < a.length() && a.charAt(j) != ' ') j++;
 				String b = a.substring(i,j);
 				if (v.EuExisto(b)) {
 					System.out.print(v.getValor(b));
@@ -29,8 +31,8 @@ class Saida {
 				i = j;
 			}
 			i++;
-			if (i == a.length()) break; 
-			if (a.charAt(i) == '+') {
+			//if (i == a.length()) break; //Por precaução, vamos deixar comentado...
+			if (i < a.length() && a.charAt(i) == '+') {
 				this.recursaoPlus(i,a,v);
 				break;
 			}
