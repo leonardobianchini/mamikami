@@ -59,9 +59,69 @@ class Condicionais {
                     if (n <= m) {
                         return true;
                     }
+                } else {
+                    String b = a.substring(0,i).replaceAll("\\s+","");
+                    int j = i;
+                    while(j < (a.length()) && a.charAt(j) != '|'  && a.charAt(j) != '&') j++;
+                    String c = a.substring(i+2, j).replaceAll("\\s+","");
+                    i = j;
+                    double m = 0, n = 1;
+                    try {
+                        n = v.getValor(b);
+                    } catch (Exception e) {
+                       n = Double.valueOf(b);
+                    }
+                    try {
+                        m = v.getValor(c);
+                    } catch (Exception e) {
+                        m = Double.valueOf(c);
+                    }
+                    if (n < m) {
+                        return true;
+                    }
                 }
             } else if (a.charAt(i) == '>') {
-                
+                if (a.charAt(i+1) == '=') {
+                    String b = a.substring(0,i).replaceAll("\\s+","");
+                    int j = i;
+                    while(j < (a.length()) && a.charAt(j) != '|'  && a.charAt(j) != '&') j++;
+                    String c = a.substring(i+2, j).replaceAll("\\s+","");
+                    i = j;
+                    double m = 0, n = 1;
+                    try {
+                        n = v.getValor(b);
+                    } catch (Exception e) {
+                       n = Double.valueOf(b);
+                    }
+                    try {
+                        m = v.getValor(c);
+                    } catch (Exception e) {
+                        m = Double.valueOf(c);
+                    }
+                    if (n >= m) {
+                        return true;
+                    } 
+                } else {
+                    String b = a.substring(0,i).replaceAll("\\s+","");
+                    int j = i;
+                    while(j < (a.length()) && a.charAt(j) != '|'  && a.charAt(j) != '&') j++;
+                    String c = a.substring(i+2, j).replaceAll("\\s+","");
+                    i = j;
+                    double m = 0, n = 1;
+                    try {
+                        n = v.getValor(b);
+                    } catch (Exception e) {
+                       n = Double.valueOf(b);
+                    }
+                    try {
+                        m = v.getValor(c);
+                    } catch (Exception e) {
+                        m = Double.valueOf(c);
+                    }
+                    if (n > m) {
+                        return true;
+                    }
+                }
             } else if (a.charAt(i) == '&') {
                 
             } else if (a.charAt(i) == '|') {
