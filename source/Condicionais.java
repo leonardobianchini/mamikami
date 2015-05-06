@@ -19,7 +19,6 @@ class Condicionais {
         } else {
             try {
                 if (v.getValor(a) > 0) {
-                    System.out.println(v.getValor(a));
                     return true;
                 }
             } catch (NullPointerException e) {

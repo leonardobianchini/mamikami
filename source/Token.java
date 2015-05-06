@@ -4,33 +4,24 @@ class Token {
 
 	public Token() {
 		tokens = "=+-/*%";
-		//palavrasReservadas = {"if", "si"};
 	}
-	public void InterpretaEscopo(String a, VetorVariavel v) {
+    public void InterpretaEscopo(String a, VetorVariavel v) {
         String b;
-		for (int i = 0;i < a.length(); i++) {
-			if (tokens.toLowerCase().contains(a.valueOf(a.charAt(i)))) {
-				if (a.charAt(i) == '=' && a.charAt(i+1) == '=') {
-                    i++;
-                    /*
-                    Depois mais eu arrumo isso, momentaneamente funcionará para diferenciar igualdade
-                    Vejamos dessa maneira, criando uma funcao que verifica palavras reservadas
-                    não é necessario verificar igualdade =D
-                    */
-                } else if (a.charAt(i) == '=') {
-                    this.TokenAtribuicaoValor(a,i,this.TokenAtribuicaoNome(a,i,v),v);
-				}
-			} else if(a.charAt(i) == ' ') {
-				continue;
-			} else {
-				for(int j = i; j < a.length(); j++) {
-					if(a.charAt(j) == ' ') {
-						i = j;
-						break;
-					} else if(tokens.toLowerCase().contains(a.valueOf(a.charAt(j)))) {
-						i = j - 1;
-						break;
-					} else if(a.charAt(j) == '(') { 
+        for (int i = 0; i < a.length(); i++) {
+            if (a.charAt(i) == '=') {
+                this.TokenAtribuicaoValor(a,i,this.TokenAtribuicaoNome(a,i,v),v);
+                while(a.charAt(i) != ';') i++;//Só para ele não ficar enrolando
+            } else {
+                for (int j = i;j < a.length(); j++) {
+                    if (a.charAt(j) == ';' || a.charAt(j) == '='||a.charAt(j) == '}' ||
+                        a.charAt(j) == '{' || a.charAt(j) == ')') {
+                        if (a.charAt(j) == '=') {
+                            i = j -1;
+                            break;
+                        }
+                        i = j;
+                        break;
+                    } else if(a.charAt(j) == '(') { 
                         b = a.substring(i,j);
                         if (b.equals("printi")) {
                             i = j;
@@ -49,12 +40,12 @@ class Token {
                             s.ifi(a.substring(i+1,j),v);
                         }
                         i = j;
-						break;
-					}
-				}
-			}
-		}
-	}
+                        break;
+                    }
+                }
+            }
+        }
+    }
     public VetorVariavel TokenAtribuicaoValor(String a, int b, VariavelTemp vt, VetorVariavel v) {
         int i = b;
         while(a.charAt(i) != ';') {
@@ -72,7 +63,7 @@ class Token {
                 vt.setValor(this.TokenDivisao(a,b,i,1,v));
                 break;
             } else if (a.charAt(i) == ';') {
-                vt.setValor(Double.valueOf(this.getPalavra(b+1,i-1,a)));
+                vt.setValor(Double.valueOf(this.getPalavraNumero(b+1,i-1,a)));
                 break;
             }
         }
@@ -80,7 +71,7 @@ class Token {
     }
     public double TokenSoma(String a, int i, int j, double valor, VetorVariavel v) {
         String b;
-        b = getPalavra(i+1,j-1,a);
+        b = getPalavraNumero(i+1,j-1,a);
         try {
             valor += Double.valueOf(b);
         } catch (Exception e) {
@@ -105,7 +96,7 @@ class Token {
     }
     public double TokenSubtracao(String a, int i, int j, double valor, VetorVariavel v) {
         String b;
-        b = getPalavra(i+1,j-1,a);
+        b = getPalavraNumero(i+1,j-1,a);
         try {
             valor -= Double.valueOf(b);
         } catch (Exception e) {
@@ -130,7 +121,7 @@ class Token {
     }
     public double TokenMultiplicacao(String a, int i, int j, double valor, VetorVariavel v) {
         String b;
-        b = getPalavra(i+1,j-1,a);
+        b = getPalavraNumero(i+1,j-1,a);
         try {
             valor *= Double.valueOf(b);
         } catch (Exception e) {
@@ -155,7 +146,7 @@ class Token {
     }
     public double TokenDivisao(String a, int i, int j, double valor, VetorVariavel v) {
         String b;
-        b = getPalavra(i+1,j-1,a);
+        b = getPalavraNumero(i+1,j-1,a);
         try {
             valor /= Double.valueOf(b);
         } catch (Exception e) {
@@ -178,7 +169,7 @@ class Token {
         }
         return valor;
     }
-    public String getPalavra(int i, int j, String a) {
+    public String getPalavraNumero(int i, int j, String a) {
         while(i <= j) {
             if (a.charAt(i) == ' ') {
                 i++;
@@ -194,9 +185,7 @@ class Token {
         String b = a;
         int j = i-1, k = 0;
         while(j >= 0) {
-            if (b.charAt(j) != ' ') {
-                k = 1;
-            } else if(b.charAt(j) == ' ' && k == 1) {
+            if(b.charAt(j) == '{' || b.charAt(j) == ';' || b.charAt(j) == '}') {
                 b = b.substring(j+1,i);
                 return v.setNovaVariavel(b);
             }
@@ -322,22 +311,25 @@ class Token {
     							if (l == 0) {
     								String c = "";
     								for (int m = i;m <= j; m++) {
-    									if(m > i) {
-    										c = c.concat(a[m]);
+                                        if (a[m].contains("\"")) {
+                                            c = c.concat(this.RemoveEspacosStrings(a[m]));
+                                        }else if(m > i) {
+    										c = c.concat(a[m].replaceAll("\\s+",""));
     									} else if(m == i) {
     										for (int n = 0; n < a[m].length(); n++) {
     											if(a[m].charAt(n) == '{') {
-    												c = c.concat(a[m].substring(n,a[m].length()));
+    												c = c.concat(a[m].substring(n,a[m].length()).replaceAll("\\s+",""));
     											}
     										}
-    									} else {
+    									}else {
     										for (int n = 0; n < a[m].length(); n++) {
     											if(a[m].charAt(n) == '}') {
-    												c = c.concat(a[m].substring(0,n));
+    												c = c.concat(a[m].substring(0,n).replaceAll("\\s+",""));
     											}
     										}
     									}
     								}
+                                    System.out.println(c);
     								return c;
     							}
     						}
@@ -347,5 +339,26 @@ class Token {
     		}
     	}
     	return null;
+    }
+    public String RemoveEspacosStrings(String a) {
+        String b = "";
+        int i = 0, j = 0, k = 0;
+        while(i < a.length()) {
+            if (a.charAt(i) == '"' && k == 0) {
+                b = b.concat(a.substring(j,i).replaceAll("\\s+",""));
+                k++;
+                j = i;
+            } else if (a.charAt(i) == '"' && k == 1) {
+                b = b.concat(a.substring(j,i));
+                k--;
+                j = i;
+            } else if (i == (a.length() -1)) {
+                b = b.concat(a.substring(j,i+1).replaceAll("\\s+",""));
+                k++;
+                j = i;
+            }
+            i++;
+        }
+        return b;
     }
 }
