@@ -27,12 +27,12 @@ class Token {
                             i = j;
                             while(a.charAt(j) != ';') j++;
                             Saida s = new Saida();
-                            s.imprimir(a.substring((i+1),(j-1)),v);
+                            s.imprimir(a.substring((i),(j)),v);
                         } else if(b.equals("printiln")) {
                             i = j;
                             while(a.charAt(j) != ';') j++;
                             Saida s = new Saida();
-                            s.imprimirln(a.substring((i+1),(j-1)),v);
+                            s.imprimirln(a.substring((i),(j)),v);
                         } else if(b.equals("ifi")) {
                             i = j;
                             Se s = new Se();
