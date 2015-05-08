@@ -63,7 +63,11 @@ class Token {
                 vt.setValor(this.TokenDivisao(a,b,i,1,v));
                 break;
             } else if (a.charAt(i) == ';') {
-                vt.setValor(Double.valueOf(this.getPalavraNumero(b+1,i-1,a)));
+                try {
+                    vt.setValor(v.getValor(a.substring(b+1,i)));
+                } catch (Exception e) {
+                    vt.setValor(Double.valueOf(this.getPalavraNumero(b+1,i-1,a)));
+                }
                 break;
             }
         }

@@ -10,7 +10,8 @@ class Testeifi{
                 count++;
         }
         Condicionais wifi = new Condicionais();
-        boolean ret = wifi.CadeiadeTokens(a,false,count);
-        return ret;
+        //boolean ret = wifi.CadeiadeTokens(a,false,count);
+        //comentado para compilar, essa classe vai ser excluida, mas a preguiça momentanea me fez apenas comentar
+        return false;
     }
 }
