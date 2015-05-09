@@ -38,6 +38,8 @@ class Token {
                             Se s = new Se();
                             while(a.charAt(j) != ')') j++;
                             s.ifi(a.substring(i+1,j),v);
+                            i = j;
+                            while()
                         }
                         i = j;
                         break;

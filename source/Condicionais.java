@@ -20,7 +20,7 @@ class Condicionais {
         } catch (Exception e) {
             m = Double.valueOf(c);
         }
-        if (m == n) {
+        if (n == m) {
             return true;
         } else {
             return false;
@@ -98,35 +98,88 @@ class Condicionais {
             return false;
         }
     }
-    public boolean Operacao(String a, VetorVariavel v) {
+    // Que merda em?
+    public boolean Operacao(String a, VetorVariavel v, int i) {
         boolean condicao = false;
-        int i = 0;
         String b, c;
         while(i < a.length()) {
             if (a.charAt(i) == '=' && a.charAt(i+1) == '=') {
                 int j = i-1;
                 while(j > 0 && a.charAt(j) != '|' && a.charAt(j) != '&') j--;
-                b = a.substring(j,i);
+                if (j == 0) {
+                    b = a.substring(j,i);
+                } else {
+                    b = a.substring(j+1,i);
+                }
                 j = i;
                 while(j < a.length() && a.charAt(j) != '|' && a.charAt(j) != '&') j++;
                 c = a.substring(i+2,j);
                 condicao = this.Igual(b,c,v);
             } else if (a.charAt(i) == '<') {
                 if(a.charAt(i+1) == '=') {
-
+                    int j = i-1;
+                    while(j > 0 && a.charAt(j) != '|' && a.charAt(j) != '&') j--;
+                    if (j == 0) {
+                        b = a.substring(j,i);
+                    } else {
+                        b = a.substring(j+1,i);
+                    }
+                    j = i;
+                    while(j < a.length() && a.charAt(j) != '|' && a.charAt(j) != '&') j++;
+                    c = a.substring(i+2,j);                    
+                    condicao =  this.MenorIgual(b,c,v);
                 } else {
+                    int j = i-1;
+                    while(j > 0 && a.charAt(j) != '|' && a.charAt(j) != '&') j--;
+                    if (j == 0) {
+                        b = a.substring(j,i);
+                    } else {
+                        b = a.substring(j+1,i);
+                    }
+                    j = i;
+                    while(j < a.length() && a.charAt(j) != '|' && a.charAt(j) != '&') j++;
+                    c = a.substring(i+1,j);
                     
+                    condicao =  this.Menor(b,c,v);
                 }
             } else if (a.charAt(i) == '>') {
                 if (a.charAt(i+1) == '=') {
-                     
+                    int j = i-1;
+                    while(j > 0 && a.charAt(j) != '|' && a.charAt(j) != '&') j--;
+                    if (j == 0) {
+                        b = a.substring(j,i);
+                    } else {
+                        b = a.substring(j+1,i);
+                    }
+                    j = i;
+                    while(j < a.length() && a.charAt(j) != '|' && a.charAt(j) != '&') j++;
+                    c = a.substring(i+2,j);
+                    condicao =  this.MaiorIgual(b,c,v);
                 } else {
-
+                    int j = i-1;
+                    while(j > 0 && a.charAt(j) != '|' && a.charAt(j) != '&') j--;
+                    if (j == 0) {
+                        b = a.substring(j,i);
+                    } else {
+                        b = a.substring(j+1,i);
+                    }
+                    j = i;
+                    while(j < a.length() && a.charAt(j) != '|' && a.charAt(j) != '&') j++;
+                    c = a.substring(i+1,j);
+                    condicao =  this.Maior(b,c,v);
                 }
             } else if (a.charAt(i) == '&') {
-                
+                if (condicao) {
+                    return this.Operacao(a,v,i+2);   
+                } else {
+                    return false;
+                }
             } else if (a.charAt(i) == '|') {
-                
+                if (!condicao) {
+                    return this.Operacao(a,v,i+2);
+                } else {
+                    return true;
+                }
             }
             i++;
         }
@@ -153,7 +206,7 @@ class Condicionais {
                 
             }
         }
-        return this.Operacao(a,v);
+        return this.Operacao(a,v,0);
     }
     public boolean getCondicao(String a, VetorVariavel v) {
         return this.EuSouReal(a,v);
