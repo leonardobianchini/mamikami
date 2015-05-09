@@ -126,7 +126,11 @@ class Condicionais {
                     }
                     j = i;
                     while(j < a.length() && a.charAt(j) != '|' && a.charAt(j) != '&') j++;
+<<<<<<< HEAD
                     c = a.substring(i+2,j);
+=======
+                    c = a.substring(i+2,j);                    
+>>>>>>> 60639b1ca4c7ed5a07188294938789566f09c21a
                     condicao =  this.MenorIgual(b,c,v);
                 } else {
                     int j = i-1;
@@ -139,7 +143,11 @@ class Condicionais {
                     j = i;
                     while(j < a.length() && a.charAt(j) != '|' && a.charAt(j) != '&') j++;
                     c = a.substring(i+1,j);
+<<<<<<< HEAD
 
+=======
+                    
+>>>>>>> 60639b1ca4c7ed5a07188294938789566f09c21a
                     condicao =  this.Menor(b,c,v);
                 }
             } else if (a.charAt(i) == '>') {
@@ -170,7 +178,11 @@ class Condicionais {
                 }
             } else if (a.charAt(i) == '&') {
                 if (condicao) {
+<<<<<<< HEAD
                     return this.Operacao(a,v,i+2);
+=======
+                    return this.Operacao(a,v,i+2);   
+>>>>>>> 60639b1ca4c7ed5a07188294938789566f09c21a
                 } else {
                     return false;
                 }
