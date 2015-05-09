@@ -21,7 +21,7 @@ class Token {
                         }
                         i = j;
                         break;
-                    } else if(a.charAt(j) == '(') { 
+                    } else if(a.charAt(j) == '(') {
                         b = a.substring(i,j);
                         if (b.equals("printi")) {
                             i = j;
@@ -38,6 +38,8 @@ class Token {
                             Se s = new Se();
                             while(a.charAt(j) != ')') j++;
                             s.ifi(a.substring(i+1,j),v);
+                            i = j;
+                            while()
                         }
                         i = j;
                         break;
@@ -63,7 +65,11 @@ class Token {
                 vt.setValor(this.TokenDivisao(a,b,i,1,v));
                 break;
             } else if (a.charAt(i) == ';') {
-                vt.setValor(Double.valueOf(this.getPalavraNumero(b+1,i-1,a)));
+                try {
+                    vt.setValor(v.getValor(a.substring(b+1,i)));
+                } catch (Exception e) {
+                    vt.setValor(Double.valueOf(this.getPalavraNumero(b+1,i-1,a)));
+                }
                 break;
             }
         }
