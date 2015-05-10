@@ -58,7 +58,7 @@ class Token {
                                 if (a.charAt(j) == '{') k++;
                                 if (a.charAt(j) == '}' && k != 0) k--;
                             }
-                            u.Loop(c,a.substring(i+2,j+1),v);
+                            u.Loop(c,a.substring(i+1,j+1),v);
                         }
                         i = j;
                         break;
