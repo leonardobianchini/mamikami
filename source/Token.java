@@ -38,9 +38,9 @@ class Token {
                             Se s = new Se();
                             while(a.charAt(j) != ')') j++;
                             String c = a.substring(i+1,j);
-                            i = j; j++;
+                            i = j;
                             int k = 1;
-                            while(a.charAt(j) != '}' && k == 0) {
+                            while(a.charAt(j) != '}' && k != 0) {
                                 j++;
                                 if (a.charAt(j) == '{') k++;
                                 if (a.charAt(j) == '}' && k != 0) k--;
