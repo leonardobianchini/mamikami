@@ -46,6 +46,19 @@ class Token {
                                 if (a.charAt(j) == '}' && k != 0) k--;
                             }
                             s.ifi(c,a.substring(i+2,j+1),v);
+                        }else if (b.equals("uaiou")) {
+                            i = j;
+                            Uaiou u = new Uaiou();
+                            while(a.charAt(j) != ')') j++;
+                            String c = a.substring(i+1,j);
+                            i = j;
+                            int k = 1;
+                            while(a.charAt(j) != '}' && k != 0) {
+                                j++;
+                                if (a.charAt(j) == '{') k++;
+                                if (a.charAt(j) == '}' && k != 0) k--;
+                            }
+                            u.Loop(c,a.substring(i+2,j+1),v);
                         }
                         i = j;
                         break;
@@ -199,7 +212,11 @@ class Token {
         while(j >= 0) {
             if(b.charAt(j) == '{' || b.charAt(j) == ';' || b.charAt(j) == '}') {
                 b = b.substring(j+1,i);
-                return v.setNovaVariavel(b);
+                if (v.EuExisto(b)) {
+                    return v.getVariavelPeloNome(b);
+                } else {
+                    return v.setNovaVariavel(b);
+                }
             }
             j--;
         }
