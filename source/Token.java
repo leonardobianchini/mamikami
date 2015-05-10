@@ -8,7 +8,7 @@ class Token {
     public void InterpretaEscopo(String a, VetorVariavel v) {
         String b;
         for (int i = 0; i < a.length(); i++) {
-            if (a.charAt(i) == '=') {
+            if (a.charAt(i) == '=' && a.charAt(i+1) != '=') {
                 this.TokenAtribuicaoValor(a,i,this.TokenAtribuicaoNome(a,i,v),v);
                 while(a.charAt(i) != ';') i++;//Só para ele não ficar enrolando
             } else {
@@ -38,9 +38,14 @@ class Token {
                             Se s = new Se();
                             while(a.charAt(j) != ')') j++;
                             String c = a.substring(i+1,j);
-                            i = j;
-                            while(a.charAt(j) != '}') j++;
-                            s.ifi(c,a.substring(i+2,j),v);
+                            i = j; j++;
+                            int k = 1;
+                            while(a.charAt(j) != '}' && k == 0) {
+                                j++;
+                                if (a.charAt(j) == '{') k++;
+                                if (a.charAt(j) == '}' && k != 0) k--;
+                            }
+                            s.ifi(c,a.substring(i+2,j+1),v);
                         }
                         i = j;
                         break;
