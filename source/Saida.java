@@ -7,8 +7,10 @@ class Saida {
 		System.out.println();
 	}
 	private void imprimindoAsBagacaTudo(String a, VetorVariavel v) {
-		int j, i = 0;
+		if (a.equals("()")) return; //Gambiarra everywere, vou vier disso até quando? já é um vicio incuravel
+		int j, i = 0;               //alguem me salva por favor!!
 		while (a.charAt(i) != ')') {
+			i++; //"correção" de bug, muito foda jogar o problema pra cima...
 			if(a.charAt(i) == '+' || a.charAt(i) == ')') {
 				if (a.charAt(i-1) == '"') {
 					j = i-2;
@@ -29,7 +31,6 @@ class Saida {
 					}
 				}
 			}
-			i++;
 		}
 	}
 }
