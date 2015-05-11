@@ -1,14 +1,15 @@
 class Fora extends Condicionais{
-    public void javapp(String a,String b,String c,String d,VetorVariavel v){
-            //a = código todo;b=condição;c =incremento; d = escopo;
+    public void BestLoopEver(String a,String b,String c,String d,String e,VetorVariavel v, int aux, int aux2){
+            //a = código todo;b = atribuição;c=condição;d=incremento;e=escopo;
             Token t = new Token();
-            for(int i = 0; i < a.length(); i++){
-                if(a.charAt(i) == '=')
-                    t.TokenAtribuicaoValor(a,i,t.TokenAtribuicaoNome(a,i,v),v);
+            System.out.println(e);
+            System.out.println(c);
+            t.TokenAtribuicaoValor(a,aux,t.TokenAtribuicaoNome(a,aux,v),v);
+            System.out.println(v.getValor("nana"));
+            System.out.println(this.getCondicao(c,v));
+            while(this.getCondicao(c,v)){
+                t.InterpretaEscopo(e,v);
+                t.TokenAtribuicaoValor(a,aux2,t.TokenAtribuicaoNome(a,aux2,v),v);
             }
-            if(getCondicao(b, v))
-                t.InterpretaEscopo(d,v);
-
-
     }
 }

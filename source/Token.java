@@ -45,7 +45,8 @@ class Token {
                                 if (a.charAt(j) == '{') k++;
                                 if (a.charAt(j) == '}' && k != 0) k--;
                             }
-                            s.ifi(c,a.substring(i+2,j+1),v);
+                            String sti = a.substring(i+2,j+1);
+                            s.ifi(c,sti,v);
                         }else if (b.equals("uaiou")) {
                             i = j;
                             Uaiou u = new Uaiou();
@@ -59,6 +60,33 @@ class Token {
                                 if (a.charAt(j) == '}' && k != 0) k--;
                             }
                             u.Loop(c,a.substring(i+1,j+1),v);
+                        } else if(b.equals("quatro")) {
+                            i = j;
+                            Fora f = new Fora();
+                            int aux = 0;
+                            while(a.charAt(j) != ';') {
+                                if(a.charAt(j) == '=') aux = j;
+                                j++;
+                            }
+                            String c = a.substring(i,j);
+                            i = j++;
+                            while(a.charAt(j) != ';') j++;
+                            String d = a.substring(i+1,j);
+                            i = j;
+                            int aux2 = 0;
+                            while(a.charAt(j) != ')') {
+                                if (a.charAt(j) == '=') aux2 = j;
+                                j++;
+                            }
+                            String e = a.substring(i+1,j);
+                            i = j;
+                            int k = 1;
+                            while(a.charAt(j) != '}' && k != 0) {
+                                j++;
+                                if (a.charAt(j) == '{') k++;
+                                if (a.charAt(j) == '}' && k != 0) k--;
+                            }
+                            f.BestLoopEver(a,c,d,e,a.substring(i+1,j+1),v,aux,aux2);
                         }
                         i = j;
                         break;
@@ -328,8 +356,8 @@ class Token {
     ///funções menores, o que não iria diminuir o tempo de execução, HU3HU3HU3HU3HU3
    	public String FuncaoParaString(String[] a, String b) {
     	for (int i = 0; i < a.length ; i++) {
-    		if(a[i].toLowerCase().contains(b)) {
-    			if(!a[i].toLowerCase().contains(";")) {
+    		if(a[i].contains(b)) {
+    			if(!a[i].contains(");")) {
     				int l = 0;
     				for (int j = i;j < a.length; j++) {
     					for (int k = 0; k < a[j].length(); k++) {
@@ -358,7 +386,6 @@ class Token {
     										}
     									}
     								}
-                                    System.out.println(c);
     								return c;
     							}
     						}

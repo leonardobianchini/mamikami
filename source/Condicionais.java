@@ -98,6 +98,24 @@ class Condicionais {
             return false;
         }
     }
+    private boolean Diferente(String b, String c, VetorVariavel v) {
+        double m = 0, n = 1;
+        try {
+            n = v.getValor(b);
+        } catch (Exception e) {
+           n = Double.valueOf(b);
+        }
+        try {
+            m = v.getValor(c);
+        } catch (Exception e) {
+            m = Double.valueOf(c);
+        }
+        if (n != m) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     // Que merda em?
     public boolean Operacao(String a, VetorVariavel v, int i) {
         boolean condicao = false;
@@ -115,6 +133,18 @@ class Condicionais {
                 while(j < a.length() && a.charAt(j) != '|' && a.charAt(j) != '&') j++;
                 c = a.substring(i+2,j);
                 condicao = this.Igual(b,c,v);
+            }else if(a.charAt(i) == '!' && a.charAt(i+1) == '=') {
+                int j = i-1;
+                while(j > 0 && a.charAt(j) != '|' && a.charAt(j) != '&') j--;
+                if (j == 0) {
+                    b = a.substring(j,i);
+                } else {
+                    b = a.substring(j+1,i);
+                }
+                j = i;
+                while(j < a.length() && a.charAt(j) != '|' && a.charAt(j) != '&') j++;
+                c = a.substring(i+2,j);
+                condicao = this.Diferente(b,c,v);
             } else if (a.charAt(i) == '<') {
                 if(a.charAt(i+1) == '=') {
                     int j = i-1;
