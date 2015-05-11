@@ -1,9 +1,14 @@
 main() {
 	i = 0;
 	j = 1;
-	uaiou(i < 10) {
+	uaiou(i < 3) {
+		ifi(i == 0) {
+			printiln("Zero");
+		}
+		ifi(i != 0) {
+			printiln("Outro");
+		}
 		i = i + 1;
-		printiln(i);
 	}
 	ifi(i == 3) {
 		ifi(j == 0) {

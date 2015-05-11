@@ -7,7 +7,6 @@ class Token {
 	}
     public void InterpretaEscopo(String a, VetorVariavel v) {
         String b;
-        System.out.println(a);
         for (int i = 0; i < a.length(); i++) {
             if (a.charAt(i) == '=' && a.charAt(i+1) != '=') {
                 this.TokenAtribuicaoValor(a,i,this.TokenAtribuicaoNome(a,i,v),v);
@@ -47,25 +46,37 @@ class Token {
                                 if (a.charAt(j) == '{') k++;
                                 if (a.charAt(j) == '}') k--;
                             }
-                            String sti = a.substring(i,j);
-                            System.out.println(sti);
+                            String sti = a.substring(i,j+1);
                             if(!s.ifi(c,sti,v)) {
-                                //i = j;
-                                //while(a.charAt(j) != '{') j++;
+                                i = j;
+                                while(j < a.length() && a.charAt(j) != '{' && a.charAt(j) != '(') j++;
+                                if(a.substring(i+1,j).equals("else")) {
+                                    i = j;
+                                    k = 1;
+                                    while(k != 0) {
+                                        j++;
+                                        if (a.charAt(j) == '{') k++;
+                                        if (a.charAt(j) == '}') k--;
+                                    }
+                                    s.Elsi(a.substring(i,j+1),v);
+                                } else {
+                                    j = i;
+                                }
                             }
                         }else if (b.equals("uaiou")) {
                             i = j;
                             Uaiou u = new Uaiou();
                             while(a.charAt(j) != ')') j++;
                             String c = a.substring(i+1,j);
-                            i = j;
+                            j++;
+                            i = j; 
                             int k = 1;
-                            while(a.charAt(j) != '}' && k != 0) {
+                            while(k != 0) {
                                 j++;
                                 if (a.charAt(j) == '{') k++;
-                                if (a.charAt(j) == '}' && k != 0) k--;
+                                if (a.charAt(j) == '}') k--;
                             }
-                            u.Loop(c,a.substring(i+1,j+1),v);
+                            u.Loop(c,a.substring(i,j+1),v);
                         } else if(b.equals("quatro")) {
                             i = j;
                             Fora f = new Fora();
