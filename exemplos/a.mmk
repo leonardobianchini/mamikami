@@ -25,10 +25,6 @@ main(){cd = 1000 * 2;
 	ifi(3 == 4) {
 		printiln("não fode");
 	}
-	uaiou(i < 100) {
-		i = i + 1;
-		printiln(i);
-	}
 	printiln("String alone =D " + "oi");
 	printi("Bulacha " + lata +" Eu quero "  + cd + " mainha " + 10);
 	printiln();

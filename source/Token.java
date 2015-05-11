@@ -7,6 +7,7 @@ class Token {
 	}
     public void InterpretaEscopo(String a, VetorVariavel v) {
         String b;
+        System.out.println(a);
         for (int i = 0; i < a.length(); i++) {
             if (a.charAt(i) == '=' && a.charAt(i+1) != '=') {
                 this.TokenAtribuicaoValor(a,i,this.TokenAtribuicaoNome(a,i,v),v);
@@ -38,15 +39,20 @@ class Token {
                             Se s = new Se();
                             while(a.charAt(j) != ')') j++;
                             String c = a.substring(i+1,j);
-                            i = j;
+                            j++;
+                            i = j; 
                             int k = 1;
-                            while(a.charAt(j) != '}' && k != 0) {
+                            while(k != 0) {
                                 j++;
                                 if (a.charAt(j) == '{') k++;
-                                if (a.charAt(j) == '}' && k != 0) k--;
+                                if (a.charAt(j) == '}') k--;
                             }
-                            String sti = a.substring(i+2,j+1);
-                            s.ifi(c,sti,v);
+                            String sti = a.substring(i,j);
+                            System.out.println(sti);
+                            if(!s.ifi(c,sti,v)) {
+                                //i = j;
+                                //while(a.charAt(j) != '{') j++;
+                            }
                         }else if (b.equals("uaiou")) {
                             i = j;
                             Uaiou u = new Uaiou();

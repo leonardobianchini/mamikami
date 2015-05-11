@@ -5,7 +5,6 @@ class Fora extends Condicionais{
             System.out.println(e);
             System.out.println(c);
             t.TokenAtribuicaoValor(a,aux,t.TokenAtribuicaoNome(a,aux,v),v);
-            System.out.println(v.getValor("nana"));
             System.out.println(this.getCondicao(c,v));
             while(this.getCondicao(c,v)){
                 t.InterpretaEscopo(e,v);
