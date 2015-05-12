@@ -104,6 +104,11 @@ class Token {
                                 if (a.charAt(j) == '}' && k != 0) k--;
                             }
                             f.BestLoopEver(a,c,d,e,a.substring(i+1,j+1),v,aux,aux2);
+                        }else if(b.equals("escaneadordofuturo")) {
+                            Entrada e = new Entrada();
+                            i = j;
+                            while(a.charAt(j) != ';') j++;
+                            e.DoubleEntrada(a.substring(i+1,j-1),v);
                         }
                         i = j;
                         break;
@@ -270,7 +275,7 @@ class Token {
 	public int getNVariaveis(String[] args) {
 		int i = 0, j = 0;
 		while(i < args.length) {
-			if (args[i].toLowerCase().contains("=")) {
+			if (args[i].contains("=")|| args[i].contains("escaneadordofuturo")) {
 				j++;
 			}
             i++;
