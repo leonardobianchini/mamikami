@@ -81,11 +81,8 @@ class Token {
                             i = j;
                             Fora f = new Fora();
                             int aux = 0;
-                            while(a.charAt(j) != ';') {
-                                if(a.charAt(j) == '=') aux = j;
-                                j++;
-                            }
-                            String c = a.substring(i,j);
+                            while(a.charAt(j) != ';') j++;
+                            String c = a.substring(i+1,j);
                             i = j++;
                             while(a.charAt(j) != ';') j++;
                             String d = a.substring(i+1,j);
@@ -96,14 +93,14 @@ class Token {
                                 j++;
                             }
                             String e = a.substring(i+1,j);
-                            i = j;
+                            i = j+1;
                             int k = 1;
-                            while(a.charAt(j) != '}' && k != 0) {
+                            while(k != 0) {
                                 j++;
                                 if (a.charAt(j) == '{') k++;
-                                if (a.charAt(j) == '}' && k != 0) k--;
+                                if (a.charAt(j) == '}') k--;
                             }
-                            f.BestLoopEver(a,c,d,e,a.substring(i+1,j+1),v,aux,aux2);
+                            f.BestLoopEver(a,c,d,e,a.substring(i,j),v);
                         }else if(b.equals("escaneadordofuturo")) {
                             Entrada e = new Entrada();
                             i = j;
