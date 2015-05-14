@@ -2,20 +2,18 @@ main() {
 	i = 0;
 	j = 1;
 	uaiou(i < 3) {
-		ifi(i == 0) {
+		ifi(i == 0 ) {
 			printiln("Zero");
-		}
-		ifi(i != 0) {
-			printiln("Outro");
+		} elsi {
+			printiln("outro");
 		}
 		i = i + 1;
 	}
 	ifi(i == 3) {
 		ifi(j == 0) {
 			printiln("ok!");
-		}
-		ifi(j != 0) {
-			printiln("erro");
+		} elsi{
+			printiln("errox");
 		}
 	}
 }

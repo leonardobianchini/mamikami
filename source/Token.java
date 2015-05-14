@@ -8,11 +8,11 @@ class Token {
     public void InterpretaEscopo(String a, VetorVariavel v) {
         String b;
         for (int i = 0; i < a.length(); i++) {
-            if (a.charAt(i) == '=' && a.charAt(i+1) != '=') {
+            if (a.charAt(i) == '=' && a.charAt(i+1) != '=' && a.charAt(i-1) != '=') {
                 //this.TokenAtribuicaoValor(a,i,this.TokenAtribuicaoNome(a,i,v),v);
                 int na = i;
                 while(a.charAt(na) != ';') na++;
-                while(a.charAt(i) != ';' && a.charAt(i) != '{') i--;
+                while(a.charAt(i) != ';' && a.charAt(i) != '{' && a.charAt(i) != '}') i--;
                 Matematica m = new Matematica();
                 m.Expressao(a.substring(i+1,na+1),v);
                 i = na;
