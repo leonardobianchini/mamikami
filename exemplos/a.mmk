@@ -10,6 +10,7 @@ main(){cd = 1000 * 2;
 	k = i + j;
 	lata = 5 + k;
 	batatinha = lata;
+	printiln(batatinha);
 	ifi(50 < 50 || batatinha >= lata|| 10 > 100){
 		printiln("A meu deus");
 		ifi(10 == 10) {

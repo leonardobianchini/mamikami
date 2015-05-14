@@ -1,8 +1,9 @@
 main() {
-	a = 1;
+	a = 2;
+	printiln(a);
 	ifi(a > 1) {
 		printiln("maior");
-	}  else {
+	} elsi {
 		printiln("menor");
 	}
 }

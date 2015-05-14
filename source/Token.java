@@ -9,8 +9,14 @@ class Token {
         String b;
         for (int i = 0; i < a.length(); i++) {
             if (a.charAt(i) == '=' && a.charAt(i+1) != '=') {
-                this.TokenAtribuicaoValor(a,i,this.TokenAtribuicaoNome(a,i,v),v);
-                while(a.charAt(i) != ';') i++;//Só para ele não ficar enrolando
+                //this.TokenAtribuicaoValor(a,i,this.TokenAtribuicaoNome(a,i,v),v);
+                int na = i;
+                while(a.charAt(na) != ';') na++;
+                while(a.charAt(i) != ';' && a.charAt(i) != '{') i--;
+                Matematica m = new Matematica();
+                m.Expressao(a.substring(i+1,na+1),v);
+                i = na;
+                //while(a.charAt(i) != ';') i++;//Só para ele não ficar enrolando
             } else {
                 for (int j = i;j < a.length(); j++) {
                     if (a.charAt(j) == ';' || a.charAt(j) == '='||a.charAt(j) == '}' ||
@@ -50,7 +56,7 @@ class Token {
                             if(!s.ifi(c,sti,v)) {
                                 i = j;
                                 while(j < a.length() && a.charAt(j) != '{' && a.charAt(j) != '(') j++;
-                                if(a.substring(i+1,j).equals("else")) {
+                                if(a.substring(i+1,j).equals("elsi")) {
                                     i = j;
                                     k = 1;
                                     while(k != 0) {
@@ -62,6 +68,19 @@ class Token {
                                 } else {
                                     j = i;
                                 }
+                            }
+                            i = j;
+                            while(j < a.length() && a.charAt(j) != '{' && a.charAt(j) != '(') j++;
+                            if(a.substring(i+1,j).equals("elsi")) {
+                                i = j;
+                                k = 1;
+                                while(k != 0) {
+                                    j++;
+                                    if (a.charAt(j) == '{') k++;
+                                    if (a.charAt(j) == '}') k--;
+                                }
+                            } else {
+                                j = i;
                             }
                         }else if (b.equals("uaiou")) {
                             i = j;
