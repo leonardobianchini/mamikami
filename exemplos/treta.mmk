@@ -1,0 +1,5 @@
+main() {
+	if(||) {
+		printiln("ERRO!");
+	}
+}
