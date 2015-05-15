@@ -24,6 +24,13 @@ class Matematica {
 				int m = i;
 				while(a.charAt(m) != ')') m++;
 				a = a.substring(0,i).concat((String.valueOf(Recursao(a.substring(i+1,m).concat(";"),v))).concat(a.substring(m+1,a.length())));
+			} else if (a.charAt(i) == '%' && j == 0){
+				int m = i-1, n = i+1;
+				while(m > 0 &&a.charAt(m) != '+' &&a.charAt(m) != '-' &&a.charAt(m) != '*'&&a.charAt(m) != '/'&&a.charAt(m) != '%') m--;
+				while(n < a.length() &&a.charAt(n) != '+' &&a.charAt(n) != '-'
+					&& a.charAt(n) != ';' &&a.charAt(n) != '*'&&a.charAt(n) != '/'&&a.charAt(n) != '%') n++;
+				a = a.substring(0,m).concat(this.Modular(a.substring(m,i),a.substring(i+1,n),v)).concat(a.substring(n,a.length()));
+				i = 0;
 			} else if(a.charAt(i) == '/' && j == 1) {
 				int m = i-1, n = i+1;
 				while(m > 0 &&a.charAt(m) != '+' &&a.charAt(m) != '-' &&a.charAt(m) != '*'&&a.charAt(m) != '/') m--;
@@ -126,5 +133,21 @@ class Matematica {
 		}
 		if ((i / j) >= 0) return ("+").concat(String.valueOf(i / j));
 		return String.valueOf(i / j);
+	}
+	private String Modular(String a, String b, VetorVariavel v){
+		double i, j;
+		if (v.EuExisto(a)) {
+			i = v.getValor(a);
+		}
+		else {
+			i = Double.valueOf(a);
+		}
+		if(v.EuExisto(b)) {
+			j = v.getValor(b);
+		} else {
+			j = Double.valueOf(b);
+		}
+		if ((i % j) >= 0) return ("+").concat(String.valueOf(i % j));
+		return String.valueOf(i % j);
 	}
 }
